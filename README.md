@@ -1,4 +1,3 @@
-ohiexamples
-===========
+# ohiexamples
 
-OHILib &amp; OHIBoard usage examples!
+libohiboard usage examples!
