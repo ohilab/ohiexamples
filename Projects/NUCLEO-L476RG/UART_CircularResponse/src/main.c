@@ -27,7 +27,19 @@
 
 #include "libohiboard.h"
 
-#define LED GPIO_PINS_PA5
+char receivedChar = '\0';
+bool send = FALSE;
+
+void callbackRx (struct _Uart_Device* dev, void* obj)
+{
+    (void)obj;
+
+    uint8_t c = 0;
+    Uart_read(dev,&c,100);
+    receivedChar = c;
+    send = TRUE;
+
+}
 
 int main(void)
 {
@@ -66,17 +78,20 @@ int main(void)
     // Initialize clock...
     Clock_init(&clkConfig);
 
-    Gpio_config(LED,GPIO_PINS_OUTPUT);
+    Uart_init(OB_UART1, &uartConfig);
+    Uart_addRxCallback(OB_UART1,callbackRx);
 
     uint32_t i = 0;
 
     while (1)
     {
         i++;
-        Gpio_set(LED);
-        System_delay(500);
-        Gpio_clear(LED);
-        System_delay(500);
+        if (send)
+        {
+            send = FALSE;
+            Uart_write(OB_UART1,(uint8_t*)&receivedChar,100);
+
+        }
 
     }
 }
