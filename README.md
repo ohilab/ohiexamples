@@ -36,3 +36,7 @@ The list of all implemented examples:
         </tr>
     </tbody>
 </table>
+
+## How-to
+
+To compile all the examples, the user can be lanch the script `compile-all.sh` inside `Scripts` folder.
