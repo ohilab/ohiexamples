@@ -29,8 +29,8 @@
 #include "hts221/hts221_reg.h"
 
 #define DEVICE_PERIPHERAL                        OB_IIC1
-#define DEVICE_PERIPHERAL_PIN_SDA                IIC_PINS_PA10
-#define DEVICE_PERIPHERAL_PIN_SCL                IIC_PINS_PA9
+#define DEVICE_PERIPHERAL_PIN_SDA                IIC_PINS_PB9
+#define DEVICE_PERIPHERAL_PIN_SCL                IIC_PINS_PB8
 
 #define DEVICE_ADDRESS                           0x5F
 
@@ -127,6 +127,7 @@ int main(void)
     while (1)
     {
         i++;
+        val = 0;
         hts221_device_id_get(&ctx,&val);
 
         if (val == HTS221_ID)
